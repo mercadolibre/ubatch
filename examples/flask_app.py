@@ -6,11 +6,8 @@ from typing import Dict, List
 from flask import Flask
 from flask_restx import Resource, Api
 
-# from numpy import genfromtxt
-
 from ubatch import ubatch_decorator
 
-# from keras.models import load_model
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.model_selection import train_test_split
 
@@ -25,7 +22,6 @@ _, X_test, _, _ = train_test_split(X, y, test_size=0.33)
 
 
 model = load("xgbregressor.joblib")
-# X_test = genfromtxt("xgbregressor_inputs.csv", delimiter=",")
 
 app = Flask(__name__)
 api = Api(app)
@@ -37,14 +33,14 @@ def predict(data: List[np.array]) -> List[np.float32]:
 
 
 @api.route("/predict_ubatch")
-class BatchPredict(Resource):
+class BatchPredict(Resource):  # type: ignore
     def post(self) -> Dict[str, float]:
-        output = predict.ubatch(random.choice(X_test))
+        output: np.array = predict.ubatch(random.choice(X_test))
         return {"prediction": float(output)}
 
 
 @api.route("/predict")
-class Predict(Resource):
+class Predict(Resource):  # type: ignore
     def post(self) -> Dict[str, float]:
-        output = predict([random.choice(X_test)])[0]
+        output: np.array = predict([random.choice(X_test)])[0]
         return {"prediction": float(output)}

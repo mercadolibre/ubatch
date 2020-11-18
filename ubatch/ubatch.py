@@ -5,32 +5,9 @@ from queue import Empty, Queue
 from typing import Callable, Generic, List, Optional
 
 from ubatch.data_request import DataRequest, DataRequestBuffer, S, T
+from ubatch.exceptions import BadBatchOutputSize, HandlerAlreadySet, HandlerNotSet
 
 logger = logging.getLogger(__name__)
-
-
-class BadBatchOutputSize(Exception):
-    def __init__(self, input_size: int, output_size: int):
-        """Raised when output size of handler differs from input size
-
-        Args:
-            input_size: Size of input
-            output_size: Size of output
-        """
-        self.input_size = input_size
-        self.output_size = output_size
-        self.message = (
-            f"Output size: {output_size} differs from the input size: {input_size}"
-        )
-        super().__init__(self.message)
-
-
-class HandlerNotSet(Exception):
-    """Raised when not handler is set in UBatch"""
-
-
-class HandlerAlreadySet(Exception):
-    """Raised when trying to change handler"""
 
 
 class UBatch(Generic[T, S]):
