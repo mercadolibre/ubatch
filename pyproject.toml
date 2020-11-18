@@ -18,7 +18,7 @@ classifiers=[
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
 ]
-repository = "git@github.com:mercadolibre/ubatch.git"
+repository = "https://github.com/mercadolibre/ubatch"
 homepage = "https://github.com/mercadolibre/ubatch"
 
 license = "Apache-2.0"
