@@ -21,7 +21,7 @@ classifiers=[
 repository = "git@github.com:mercadolibre/ubatch.git"
 homepage = "https://github.com/mercadolibre/ubatch"
 
-license = "Apache"
+license = "Apache-2.0"
 readme = "README.md"
 
 [tool.poetry.urls]
