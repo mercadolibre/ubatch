@@ -32,7 +32,7 @@ Example
 >>>
 >>>
 >>> def thread_function(number: int) -> None:
-...     result = squared_batch.get(number)
+...     result = squared_batch.ubatch(number)
 ...     print(f"Input: {number}, Output: {result}")
 ...
 >>>
