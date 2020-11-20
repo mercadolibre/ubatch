@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = "uBatch"
-copyright = "2020, Rodolfo E. Edelmann"
+copyright = "2020, MercadoLibre"
 author = "Rodolfo E. Edelmann"
 
 
