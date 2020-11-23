@@ -11,7 +11,7 @@ Welcome to uBatch's documentation!
    :caption: Contents:
 
    README
-   API
+   api
    CONTRIBUTING
    CHANGELOG
 
