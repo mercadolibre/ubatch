@@ -1,4 +1,4 @@
-# Contributing
+# Contributing Guide
 
 ## How to contribute
 
@@ -17,7 +17,8 @@ Generally speaking an RFC is needed when you want to add a new component or chan
 
 Though it seems a little bureaucratic, the process is in place in order to avoid frustration of a potential contributor by making the discussions take place before any code is written. Once the design and direction is fully agreed then the contributor can work peacefully knowing that their change will be committed.
 
-As of this moment all you need to do is create an issue and use the [Feature Request Template](/.github/ISSUE_TEMPLATE/feature_request.md).
+As of this moment all you need to do is create an issue and use the [Feature Request Template](https://github.com/mercadolibre/ubatch/blob/master/.github/ISSUE_TEMPLATE/feature_request.md).
+
 
 Please prepend your issue title with `[RFC]` so that's easier to filter.
 
@@ -47,24 +48,3 @@ Your basic steps to get going:
 * Push your commits to GitHub and create a pull request against the corresponding component master branch.
 
 If taking too much time to deliver code, **always** [rebase](https://git-scm.com/docs/git-rebase) towards `master` before asking for a review, and avoid reverse merge commits. We **HATE** reverse merge commits (they make git history tree a mess) and will reject contributions that have them.
-
-## Developing ubatch
-
-To develop ubatch
-
-* Clone this repo.
-
-* Create and activate a virtualenv.
-
-* Install dev dependencies:
-
-```bash
-$ python3 -m venv venv
-$ . venv/bin/activate
-$ pip install -e ."[dev]"
-$ pre-commit install
-```
-
-## Branching Model
-
-TBD

@@ -11,10 +11,9 @@ Welcome to uBatch's documentation!
    :caption: Contents:
 
    README
+   API
    CONTRIBUTING
    CHANGELOG
-
-
 
 Indices and tables
 ==================

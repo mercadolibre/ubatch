@@ -204,5 +204,5 @@ $ make html
 
 # Licensing
 
-uBatch is licensed under the Apache License, Version 2.0.
+**uBatch** is licensed under the Apache License, Version 2.0.
 See [LICENSE](https://github.com/mercadolibre/ubatch/blob/master/docs/LICENSE) for the full license text.

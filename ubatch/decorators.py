@@ -10,8 +10,6 @@ class UBatchWrapper:
     ):
         """Wrapper around user function to add ubatch functionality
 
-        TODO: Stop UBatch thread
-
         Args:
             max_size (int): [description]
             timeout (float): [description]

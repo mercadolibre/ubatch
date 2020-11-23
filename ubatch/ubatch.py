@@ -30,7 +30,7 @@ class HandlerNotSet(Exception):
 
 
 class HandlerAlreadySet(Exception):
-    """Raised when trying to change handler"""
+    """Raised when trying to change handler on running uBatch"""
 
 
 class UBatch(Generic[T, S]):
@@ -178,7 +178,7 @@ class UBatch(Generic[T, S]):
         return self
 
     def stop(self) -> None:  # pragma: no cover
-        """Run handler on threads to process input data."""
+        """Stop thread processing data."""
         logger.info("Stoping handler thread")
 
         self._stop_thread = True
