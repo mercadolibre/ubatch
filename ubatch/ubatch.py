@@ -41,7 +41,7 @@ class UBatch(Generic[T, S]):
         """Join multiple individual inputs into one batch of inputs.
 
         Args:
-            handler: User function that handle batches.
+            handler: Function that handle batches.
             max_size: Maximum size of inputs to pass to the handler.
             timeout: Maximum time (in seconds) to wait for inputs before
                 starting to process them.
@@ -56,7 +56,7 @@ class UBatch(Generic[T, S]):
         self._thread: Optional[threading.Thread] = None
 
     def set_handler(self, handler: Callable[[List[T]], List[S]]) -> None:
-        """Set user function to handle inputs data
+        """Set function to handle inputs data
 
         Args:
             handler: Any callable to handle input data and return output data
