@@ -10,6 +10,8 @@ the code that processes the batches should release the Python GIL for allowing
 others threads/coroutines to run, this is true in many C libraries wrapped in
 Python.
 
+[![Documentation Status](https://readthedocs.org/projects/ubatch/badge/?version=latest)](https://ubatch.readthedocs.io/en/latest/?badge=latest)
+
 Example
 
 ```python
