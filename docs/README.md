@@ -53,16 +53,15 @@ The example above shows 10 threads calculating the square of a number, using
 **uBatch** the threads delegate the calculation task to a single
 process that calculates them in batch.
 
-
-# Installing uBatch and Supported Versions
+## Installing uBatch and Supported Versions
 
 ```bash
-$ pip install ubatch
+pip install ubatch
 ```
 
 uBatch officially supports Python 3.6+.
 
-# Why using uBatch?
+## Why using uBatch
 
 When data is processed offline it is easy to collect data to be processed at
 same time, the same does not happen when requests are attended online as
@@ -71,7 +70,7 @@ example using Flask, this is where the uBatch potential comes in.
 **TensorFlow** or **Scikit-learn** are just some of the libraries
 that can take advantage of this functionality.
 
-# uBatch and application server
+## uBatch and application server
 
 Python application servers work like this:
 
@@ -115,7 +114,7 @@ class Predict(Resource):
 Start application server:
 
 ```bash
-$ gunicorn -k gevent app:app
+gunicorn -k gevent app:app
 ```
 
 Another example using **uBatch** to join multiple requests into one:
@@ -163,46 +162,46 @@ class Predict(Resource):
 Start application server:
 
 ```bash
-$ gunicorn -k gevent app:app
+gunicorn -k gevent app:app
 ```
 
-# Start developing uBatch
+## Start developing uBatch
 
 Install poetry
 
 ```bash
-$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 ```
 
 Clone repository
 
 ```bash
-$ git clone git@github.com:mercadolibre/ubatch.git
+git clone git@github.com:mercadolibre/ubatch.git
 ```
 
 Start shell and install dependencies
 
 ```bash
-$ cd ubatch
-$ poetry shell
-$ poetry install
+cd ubatch
+poetry shell
+poetry install
 ```
 
 Run tests
 
 ```bash
-$ pytest
+pytest
 ```
 
 Building docs
 
 ```bash
-$ cd ubatch/docs
-$ poetry shell
-$ make html
+cd ubatch/docs
+poetry shell
+make html
 ```
 
-# Licensing
+## Licensing
 
 **uBatch** is licensed under the Apache License, Version 2.0.
 See [LICENSE](https://github.com/mercadolibre/ubatch/blob/master/docs/LICENSE) for the full license text.

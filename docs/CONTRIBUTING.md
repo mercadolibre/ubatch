@@ -19,7 +19,6 @@ Though it seems a little bureaucratic, the process is in place in order to avoid
 
 As of this moment all you need to do is create an issue and use the [Feature Request Template](https://github.com/mercadolibre/ubatch/blob/master/.github/ISSUE_TEMPLATE/feature_request.md).
 
-
 Please prepend your issue title with `[RFC]` so that's easier to filter.
 
 ## Bug Reports
@@ -44,7 +43,6 @@ Your basic steps to get going:
 * Commit as you go following our git conventions.
 * Include tests that cover all non-trivial code. The existing tests should provide a template on how to test correctly.
 * Make sure every test passes.
-* All code changes are expected to comply with the formatting suggested by gofmt & the current in use golint configuration.
 * Push your commits to GitHub and create a pull request against the corresponding component master branch.
 
 If taking too much time to deliver code, **always** [rebase](https://git-scm.com/docs/git-rebase) towards `master` before asking for a review, and avoid reverse merge commits. We **HATE** reverse merge commits (they make git history tree a mess) and will reject contributions that have them.
