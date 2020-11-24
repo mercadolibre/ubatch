@@ -35,6 +35,10 @@ gunicorn = { version = "^20.0", optional = true }
 xgboost = { version = "^1.2", optional = true }
 keras = { version = "^2.4", optional = true }
 tensorflow = { version = "^2.3", optional = true }
+Sphinx = { version = "^3.3", optional = true }
+recommonmark = { version = "^0.6", optional = true }
+sphinx_rtd_theme = { version = "^0.5", optional = true }
+
 
 [tool.poetry.dev-dependencies]
 black = "*"
@@ -48,12 +52,11 @@ pytest-freezegun = "^0.4"
 pytest-mock = "^3.3"
 pytest-timeout = "^1.4"
 pytest-reraise = "^1.0"
-Sphinx = "^3.3"
-recommonmark = "^0.6"
-sphinx_rtd_theme = "^0.5"
+
 
 [tool.poetry.extras]
 benchmark = ["flask-restx", "scikit-learn", "gunicorn", "xgboost", "keras", "tensorflow"]
+docs = ["Sphinx", "recommonmark", "sphinx_rtd_theme"]
 
 [tool.black]
 line-length = 88
