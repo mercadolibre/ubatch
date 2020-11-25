@@ -41,7 +41,6 @@ class UBatch(Generic[T, S]):
         """Join multiple individual inputs into one batch of inputs.
 
         Args:
-            handler: Function that handle batches.
             max_size: Maximum size of inputs to pass to the handler.
             timeout: Maximum time (in seconds) to wait for inputs before
                 starting to process them.
