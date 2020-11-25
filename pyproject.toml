@@ -22,7 +22,7 @@ repository = "https://github.com/mercadolibre/ubatch"
 homepage = "https://github.com/mercadolibre/ubatch"
 
 license = "Apache-2.0"
-readme = "README.md"
+readme = "docs/README.md"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/mercadolibre/ubatch/issues"
@@ -35,6 +35,11 @@ gunicorn = { version = "^20.0", optional = true }
 xgboost = { version = "^1.2", optional = true }
 keras = { version = "^2.4", optional = true }
 tensorflow = { version = "^2.3", optional = true }
+Sphinx = { version = "^3.3", optional = true }
+recommonmark = { version = "^0.6", optional = true }
+sphinx_rtd_theme = { version = "^0.5", optional = true }
+sphinx-autodoc-typehints = { version = "^1.11", optional = true }
+
 
 [tool.poetry.dev-dependencies]
 black = "*"
@@ -49,8 +54,10 @@ pytest-mock = "^3.3"
 pytest-timeout = "^1.4"
 pytest-reraise = "^1.0"
 
+
 [tool.poetry.extras]
 benchmark = ["flask-restx", "scikit-learn", "gunicorn", "xgboost", "keras", "tensorflow"]
+docs = ["Sphinx", "recommonmark", "sphinx_rtd_theme", "sphinx-autodoc-typehints"]
 
 [tool.black]
 line-length = 88
