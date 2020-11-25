@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "ubatch"
-version = "0.0.2"
+version = "0.0.3"
 description = "Micro batch solution for improve throughput in SIMD processes"
 authors = ["Rodolfo E. Edelmann <redelmann@mercadolibre.com>"]
 maintainers = ["Leandro E. Colombo Viña <leandro.colombo@mercadolibre.com>"]
