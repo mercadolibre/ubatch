@@ -57,7 +57,7 @@ pytest-reraise = "^1.0"
 
 [tool.poetry.extras]
 benchmark = ["flask-restx", "scikit-learn", "gunicorn", "xgboost", "keras", "tensorflow"]
-docs = ["Sphinx", "recommonmark", "sphinx_rtd_theme"]
+docs = ["Sphinx", "recommonmark", "sphinx_rtd_theme", "sphinx-autodoc-typehints"]
 
 [tool.black]
 line-length = 88
