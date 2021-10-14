@@ -1,11 +1,11 @@
 import pytest
 
-from ubatch.data_request import DataRequest, DataRequestBuffer, DataRequestBufferFull
+from ubatch.data_request import _DataRequest, _DataRequestBuffer, DataRequestBufferFull
 
 
 def test_data_request_buffer_contains_true():
-    data_buffer = DataRequestBuffer(size=10)
-    data_request = DataRequest(data="foo", timeout=10)
+    data_buffer = _DataRequestBuffer(size=10)
+    data_request = _DataRequest(timeout=10)
 
     data_buffer.append(data_request)
 
@@ -13,55 +13,55 @@ def test_data_request_buffer_contains_true():
 
 
 def test_data_request_buffer_contains_false():
-    data_buffer = DataRequestBuffer(size=10)
-    data_request = DataRequest(data="foo", timeout=10)
+    data_buffer = _DataRequestBuffer(size=10)
+    data_request = _DataRequest(timeout=10)
 
     assert data_request not in data_buffer
 
 
 def test_full_data_request_buffer_raises_buffer_full():
-    data_buffer = DataRequestBuffer(size=1)
+    data_buffer = _DataRequestBuffer(size=1)
 
     with pytest.raises(DataRequestBufferFull):
         for i in range(2):
-            data_buffer.append(DataRequest(data="foo", timeout=10))
+            data_buffer.append(_DataRequest(timeout=10))
 
 
 def test_data_request_buffer_iterate_over_all_items():
-    data_buffer = DataRequestBuffer(size=10)
+    data_buffer = _DataRequestBuffer(size=10)
 
-    data_buffer.append(DataRequest(data="foo", timeout=10))
-    data_buffer.append(DataRequest(data="foo", timeout=10))
+    data_buffer.append(_DataRequest(timeout=10))
+    data_buffer.append(_DataRequest(timeout=10))
 
     for i in data_buffer:
-        assert isinstance(i, DataRequest)
+        assert isinstance(i, _DataRequest)
 
 
 def test_data_request_buffer_len_on_items():
-    data_buffer = DataRequestBuffer(size=10)
+    data_buffer = _DataRequestBuffer(size=10)
 
-    data_buffer.append(DataRequest(data="foo", timeout=10))
+    data_buffer.append(_DataRequest(timeout=10))
 
     assert len(data_buffer) == 1
 
 
 def test_data_request_buffer_len_when_empty():
-    data_buffer = DataRequestBuffer(size=10)
+    data_buffer = _DataRequestBuffer(size=10)
 
     assert len(data_buffer) == 0
 
 
 def test_data_request_buffer_time_is_over_false_on_empty_buffer():
-    data_buffer = DataRequestBuffer(size=10)
+    data_buffer = _DataRequestBuffer(size=10)
     assert data_buffer.time_is_over() is False
 
 
 @pytest.mark.freeze_time("2018-09-07 16:35:00.000")
 def test_data_request_buffer_time_is_over_true_if_any(freezer):
-    data_buffer = DataRequestBuffer(size=10)
+    data_buffer = _DataRequestBuffer(size=10)
 
-    data_request1 = DataRequest(data="foo", timeout=5)
-    data_request2 = DataRequest(data="foo", timeout=10)
+    data_request1 = _DataRequest(timeout=5)
+    data_request2 = _DataRequest(timeout=10)
 
     data_buffer.append(data_request1)
     data_buffer.append(data_request2)
@@ -76,10 +76,10 @@ def test_data_request_buffer_time_is_over_true_if_any(freezer):
 
 @pytest.mark.freeze_time("2018-09-07 16:35:00.000")
 def test_data_request_buffer_time_is_over_in_future_if_any(freezer):
-    data_buffer = DataRequestBuffer(size=10)
+    data_buffer = _DataRequestBuffer(size=10)
 
-    data_request1 = DataRequest(data="foo", timeout=5)
-    data_request2 = DataRequest(data="foo", timeout=10)
+    data_request1 = _DataRequest(timeout=5)
+    data_request2 = _DataRequest(timeout=10)
 
     data_buffer.append(data_request1)
     data_buffer.append(data_request2)
@@ -93,52 +93,60 @@ def test_data_request_buffer_time_is_over_in_future_if_any(freezer):
 
 
 def test_data_request_buffer_full_true_if_full():
-    data_buffer = DataRequestBuffer(size=2)
+    data_buffer = _DataRequestBuffer(size=2)
 
     for _ in range(2):
-        data_buffer.append(DataRequest(data="foo", timeout=5))
+        data_buffer.append(_DataRequest(timeout=5))
 
     assert data_buffer.full() is True
 
 
 def test_data_request_buffer_full_false_if_not_full():
-    data_buffer = DataRequestBuffer(size=2)
+    data_buffer = _DataRequestBuffer(size=2)
 
-    data_buffer.append(DataRequest(data="foo", timeout=5))
+    data_buffer.append(_DataRequest(timeout=5))
 
     assert data_buffer.full() is False
 
 
 def test_data_request_buffer_space_left_when_not_elements():
-    data_buffer = DataRequestBuffer(size=10)
+    data_buffer = _DataRequestBuffer(size=10)
     assert data_buffer.space_left() == 10
 
 
 def test_data_request_buffer_space_left_decrease_on_elements():
-    data_buffer = DataRequestBuffer(size=10)
-    data_buffer.append(DataRequest(data="foo", timeout=5))
+    data_buffer = _DataRequestBuffer(size=10)
+    data_buffer.append(_DataRequest(timeout=5))
     assert data_buffer.space_left() == 9
 
 
 def test_data_request_buffer_clear_remove_all_elements():
-    data_buffer = DataRequestBuffer(size=10)
-    data_buffer.append(DataRequest(data="foo", timeout=5))
+    data_buffer = _DataRequestBuffer(size=10)
+    data_buffer.append(_DataRequest(timeout=5))
     data_buffer.clear()
     assert len(data_buffer) == 0
 
 
-def test_data_request_buffer_get_inputs_return_data_value():
-    data_buffer = DataRequestBuffer(size=10)
-    data_buffer.append(DataRequest(data="foo", timeout=5))
-    data_buffer.append(DataRequest(data="bar", timeout=5))
+def test_data_request_buffer_get_input_args():
+    data_buffer = _DataRequestBuffer(size=10)
+    data_buffer.append(_DataRequest(timeout=5, args=(1, 2)))
+    data_buffer.append(_DataRequest(timeout=5, args=(7, 5)))
 
-    assert data_buffer.get_inputs() == ["foo", "bar"]
+    assert data_buffer.get_input_args() == [[1, 7], [2, 5]]
+
+
+def test_data_request_buffer_get_input_kwargs():
+    data_buffer = _DataRequestBuffer(size=10)
+    data_buffer.append(_DataRequest(timeout=5, kwargs={'par': 'foo'}))
+    data_buffer.append(_DataRequest(timeout=5, kwargs={'par': 'bar'}))
+
+    assert data_buffer.get_input_kwargs() == {'par': ['foo', 'bar']}
 
 
 def test_data_request_buffer_set_outputs_store_outputs_in_order():
-    data_buffer = DataRequestBuffer(size=10)
-    data1 = DataRequest(data="foo", timeout=5)
-    data2 = DataRequest(data="bar", timeout=5)
+    data_buffer = _DataRequestBuffer(size=10)
+    data1 = _DataRequest(args=("foo", ), timeout=5)
+    data2 = _DataRequest(args=("bar", ), timeout=5)
     data_buffer.append(data1)
     data_buffer.append(data2)
 
@@ -149,9 +157,9 @@ def test_data_request_buffer_set_outputs_store_outputs_in_order():
 
 
 def test_data_request_buffer_set_exception_store_exception_in_all():
-    data_buffer = DataRequestBuffer(size=10)
-    data1 = DataRequest(data="foo", timeout=5)
-    data2 = DataRequest(data="bar", timeout=5)
+    data_buffer = _DataRequestBuffer(size=10)
+    data1 = _DataRequest(args=("foo", ), timeout=5)
+    data2 = _DataRequest(args=("bar", ), timeout=5)
     data_buffer.append(data1)
     data_buffer.append(data2)
 

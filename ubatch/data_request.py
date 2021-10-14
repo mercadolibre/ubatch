@@ -1,9 +1,8 @@
 import time
-from typing import Generic, Iterator, List, Optional, TypeVar
+from typing import Generic, Iterator, List, Optional, TypeVar, Dict, Tuple
 
 T = TypeVar("T")
 S = TypeVar("S")
-
 
 OUTPUT_CHECK_INTERVAL: float = 0.001  # Time to wait (in seconds) for output.
 
@@ -20,8 +19,8 @@ class DataRequestBufferFull(Exception):
     """
 
 
-class DataRequest(Generic[T, S]):
-    def __init__(self, data: T, timeout: float):
+class _DataRequest(Generic[T, S]):
+    def __init__(self, timeout: float = 1, args: Tuple[T, ...] = (), kwargs: Dict[str, T] = {}):
         """Handles user input data that will be processed in a queue.
         Stores output or exceptions that may occurs during the handling
         of the request.
@@ -38,7 +37,7 @@ class DataRequest(Generic[T, S]):
 
         Handle output data:
 
-            >>> data_request = DataRequest(data="foo", timeout=10)
+            >>> data_request = _DataRequest(data="foo", timeout=10)
             >>> data_request.ready
             False
             >>> data_request.output = "bar"
@@ -47,13 +46,13 @@ class DataRequest(Generic[T, S]):
 
         Accessing output of data not ready:
 
-            >>> data_request = DataRequest(data="foo", timeout=10)
+            >>> data_request = _DataRequest(data="foo", timeout=10)
             >>> data_request.output
             raise DataRequestNotReady
 
         Passing exception as output:
 
-            >>> data_request = DataRequest(data="foo", timeout=10)
+            >>> data_request = _DataRequest(data="foo", timeout=10)
             >>> data_request.exception = ValueError("bar")
             >>> data_request.output
             raise ValueError("bar")
@@ -62,7 +61,8 @@ class DataRequest(Generic[T, S]):
             data: User input data.
             timeout: Maximum expected time (in seconds) for this request in queue.
         """
-        self.data = data  # User input data
+        self.args = args
+        self.kwargs = kwargs
         self.timeout = timeout  # Maximum time waiting without being processed
 
         self._ready: bool = False  # True when output data is set.
@@ -157,18 +157,18 @@ class DataRequest(Generic[T, S]):
         return self._latency
 
 
-class DataRequestBuffer(Generic[T, S]):
+class _DataRequestBuffer(Generic[T, S]):
     def __init__(self, size: int):
         self._size = size
-        self._buffer: List[DataRequest[T, S]] = []
+        self._buffer: List[_DataRequest[T, S]] = []
 
-    def __iter__(self) -> Iterator[DataRequest[T, S]]:
+    def __iter__(self) -> Iterator[_DataRequest[T, S]]:
         return iter(self._buffer)
 
     def __len__(self) -> int:
         return len(self._buffer)
 
-    def append(self, data: DataRequest[T, S]) -> None:
+    def append(self, data: _DataRequest[T, S]) -> None:
         if self.full():
             raise DataRequestBufferFull()
 
@@ -191,8 +191,21 @@ class DataRequestBuffer(Generic[T, S]):
     def full(self) -> bool:
         return len(self) >= self._size
 
-    def get_inputs(self) -> List[T]:
-        return [data_request.data for data_request in self]
+    def get_input_args(self) -> List[List[T]]:
+        args = [data_request.args for data_request in self]
+        processed_args = []
+        for i in range(len(args[0])):
+            processed_args.append([request[i] for request in args])
+
+        return processed_args
+
+    def get_input_kwargs(self) -> Dict[str, List[T]]:
+        kwargs = [data_request.kwargs for data_request in self]
+        processed_kwargs = {}
+        for request_param in kwargs[0].keys():
+            processed_kwargs[request_param] = [request[request_param] for request in kwargs]
+
+        return processed_kwargs
 
     def set_outputs(self, outputs: List[S]) -> None:
         for data_request, output in zip(self, outputs):

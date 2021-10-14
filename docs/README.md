@@ -55,6 +55,79 @@ The example above shows 10 threads calculating the square of a number, using
 **uBatch** the threads delegate the calculation task to a single
 process that calculates them in batch.
 
+
+And with multiple parameters in user method
+
+```python
+>>> import threading
+>>> 
+>>> from typing import List
+>>> from ubatch import ubatch_decorator
+>>> 
+>>> 
+>>> @ubatch_decorator(max_size=5, timeout=0.01)
+... def squared_cube(a: List[int], mode: List[str]) -> List[int]:
+...     print(a)
+...     print(mode)
+...     return [x ** 2 if y == 'square' else x ** 3 for x, y in zip(a, mode)]
+... 
+>>> 
+>>> inputs = list(range(10))
+>>> modes = ['square' if i % 2 == 0 else 'cube' for i in inputs]
+>>> 
+>>> # Run function as usual
+>>> _ = squared_cube(inputs, modes)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+['square', 'cube', 'square', 'cube', 'square', 'cube', 'square', 'cube', 'square', 'cube']
+>>> 
+>>> 
+>>> def thread_function(number: int, mode: str) -> None:
+...     _ = squared_cube.ubatch(number, mode)
+... 
+>>> 
+>>> # Multiple threads squared individual inputs
+... threads = []
+>>> for i,j in zip(inputs, modes):
+...     t = threading.Thread(target=thread_function, args=(i,j))
+...     threads.append(t)
+...     t.start()
+...     
+[0, 1, 2, 3, 4]
+['square', 'cube', 'square', 'cube', 'square']
+[5, 6, 7, 8, 9]
+['cube', 'square', 'cube', 'square', 'cube']
+>>> for t in threads:
+...     t.join()
+```
+
+This example is pretty similar to the previous one, the only difference is
+that the decorated function receives an additional parameter and **uBatch** 
+is able to support a variable number of parameters. 
+
+If you have a function with a parameter that doesn't need to be accumulated, 
+with every call you can use the python "partial" tool before the use of 
+ubatch_decorator.
+
+```python
+>>> import threading
+>>> 
+>>> from functools import partial
+>>> from typing import List, Any
+>>> from ubatch import ubatch_decorator
+>>> 
+>>> 
+>>> def squared_cube(model: Any, a: List[int], mode: List[str]) -> List[int]:
+...     print(a)
+...     print(mode)
+...     return [x ** 2 if y == 'square' else x ** 3 for x, y in zip(a, mode)]
+... 
+>>> squared_cube = partial(squared_cube, 'This is a model')
+>>> squared_cube = ubatch_decorator(max_size=5, timeout=0.01)(squared_cube)
+... ...
+```
+
+The code after that can remains like in the previous example.
+
 ## Installing uBatch and Supported Versions
 
 ```bash

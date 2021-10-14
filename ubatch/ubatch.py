@@ -4,7 +4,7 @@ import time
 from queue import Empty, Queue
 from typing import Callable, Generic, List, Optional
 
-from ubatch.data_request import DataRequest, DataRequestBuffer, S, T
+from ubatch.data_request import _DataRequest, _DataRequestBuffer, S, T
 
 logger = logging.getLogger(__name__)
 
@@ -49,12 +49,12 @@ class UBatch(Generic[T, S]):
         self.max_size = max_size  # Maximum size of handler inputs.
         self.timeout = timeout  # Maximum time (in seconds) of inputs to wait.
 
-        self._handler: Optional[Callable[[List[T]], List[S]]] = None
-        self._requests_queue: Queue[DataRequest[T, S]] = Queue()
+        self._handler: Optional[Callable[..., List[S]]] = None
+        self._requests_queue: Queue[_DataRequest[T, S]] = Queue()
         self._stop_thread: bool = False
         self._thread: Optional[threading.Thread] = None
 
-    def set_handler(self, handler: Callable[[List[T]], List[S]]) -> None:
+    def set_handler(self, handler: Callable[..., List[S]]) -> None:
         """Set function to handle inputs data
 
         Args:
@@ -65,8 +65,8 @@ class UBatch(Generic[T, S]):
 
         self._handler = handler
 
-    def _wait_buffer_ready(self) -> DataRequestBuffer[T, S]:
-        buffer = DataRequestBuffer[T, S](size=self.max_size)
+    def _wait_buffer_ready(self) -> _DataRequestBuffer[T, S]:
+        buffer = _DataRequestBuffer[T, S](size=self.max_size)
 
         #  WARNING: This logic is difficult to understand and any change
         # can have an impact on performance.
@@ -99,8 +99,8 @@ class UBatch(Generic[T, S]):
 
         Blocks until batch is ready for being processed, when batch is ready
         call a handler to process input data, if an exceptions is raised on handler
-        store exceptions into all DataRequest inside buffer, if exception isn't raised
-        store returned value from handler on each individual DataRequest object.
+        store exceptions into all _DataRequest inside buffer, if exception isn't raised
+        store returned value from handler on each individual _DataRequest object.
         """
         if not self._handler:
             raise HandlerNotSet()
@@ -117,16 +117,16 @@ class UBatch(Generic[T, S]):
         buffer_size = len(buffer)
 
         try:
-            input_data = buffer.get_inputs()
-
+            args = buffer.get_input_args()
+            kwargs = buffer.get_input_kwargs()
             start_at = time.time()
-            batch_output = self._handler(input_data)
+            batch_output = self._handler(*args, **kwargs)
             elapsed_time = time.time() - start_at
 
             output_size = len(batch_output)
 
             if buffer_size != output_size:
-                # This exception is going to be set in every DataRequest
+                # This exception is going to be set in every _DataRequest
                 raise BadBatchOutputSize(buffer_size, output_size)
 
         except Exception as ex:
@@ -142,7 +142,7 @@ class UBatch(Generic[T, S]):
         while not self._stop_thread:
             self._procces_in_batch()
 
-    def ubatch(self, data: T) -> S:
+    def ubatch(self, *args: T, **kwargs: T) -> S:
         """Add a new input to queue to being processed by handler in batches
 
         Wait and returns output value from handler.
@@ -150,7 +150,7 @@ class UBatch(Generic[T, S]):
         if not self._thread:
             logger.warning("ubatch is not running")
 
-        data_request = DataRequest[T, S](data=data, timeout=self.timeout)
+        data_request = _DataRequest[T, S](timeout=self.timeout, args=args, kwargs=kwargs)
 
         self._requests_queue.put(data_request)
 

@@ -20,3 +20,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - First Release.
+
+## [1.0.0] - 2021-10-14
+
+### Changed
+
+- Support for multiple parameters in a function decorated with ubatch_decorator 
+(Without break compatibility)
+- New major version
+
+### Added
+
+- Documentation about the use case for multiple parameters in README.md
+- New tests to validate the changes
