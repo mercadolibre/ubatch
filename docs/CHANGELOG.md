@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 (Without break compatibility)
 - DataRequest and _DataRequestBuffer are not public classes anymore
 
-## [0.0.3]
+## [0.0.3] - 2020-11-25
 
 ### Added
 
