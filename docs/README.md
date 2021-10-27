@@ -11,8 +11,9 @@ others threads/coroutines to run, this is true in many C libraries wrapped in
 Python.
 
 [![Documentation Status](https://readthedocs.org/projects/ubatch/badge/?version=latest)](https://ubatch.readthedocs.io/en/latest/?badge=latest)
-
 [![Downloads](https://pepy.tech/badge/ubatch)](https://pepy.tech/project/ubatch)
+[![Downloads](https://pepy.tech/badge/ubatch/month)](https://pepy.tech/project/ubatch)
+[![Downloads](https://pepy.tech/badge/ubatch/week)](https://pepy.tech/project/ubatch)
 
 Example
 
