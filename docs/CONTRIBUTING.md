@@ -46,3 +46,39 @@ Your basic steps to get going:
 * Push your commits to GitHub and create a pull request against the corresponding component master branch.
 
 If taking too much time to deliver code, **always** [rebase](https://git-scm.com/docs/git-rebase) towards `master` before asking for a review, and avoid reverse merge commits. We **HATE** reverse merge commits (they make git history tree a mess) and will reject contributions that have them.
+
+### Installation
+
+Install poetry
+
+```bash
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+```
+
+Clone repository
+
+```bash
+git clone git@github.com:mercadolibre/ubatch.git
+```
+
+Start shell and install dependencies
+
+```bash
+cd ubatch
+poetry shell
+poetry install
+```
+
+Run tests
+
+```bash
+pytest
+```
+
+Building docs
+
+```bash
+cd ubatch/docs
+poetry shell
+make html
+```

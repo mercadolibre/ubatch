@@ -1,5 +1,16 @@
 # uBatch
 
+## Index
+
+* [What is uBatch?](#what-is-uBatch?)
+* [Installing uBatch and supported versions](#installing-uBatch-and-supported-versions)
+* [Why use uBatch](#why-use-uBatch?)
+* [Licensing](#licensing)
+* [Contributing](#contributing)
+* [Maintainers](#maintainers)
+
+## What is uBatch?
+
 **uBatch** is a simple, yet elegant library for processing streams data in micro batches.
 
 **uBatch** allow to process multiple inputs data from different threads
@@ -57,7 +68,6 @@ Example
 The example above shows 10 threads calculating the square of a number, using
 **uBatch** the threads delegate the calculation task to a single
 process that calculates them in batch.
-
 
 And with multiple parameters in user method
 
@@ -131,15 +141,15 @@ ubatch_decorator.
 
 The code after that can remains like in the previous example.
 
-## Installing uBatch and Supported Versions
+## Installing uBatch and supported versions
 
 ```bash
-pip install ubatch
+poetry install
 ```
 
 uBatch officially supports Python 3.6+.
 
-## Why using uBatch
+## Why use uBatch?
 
 When data is processed offline it is easy to collect data to be processed at
 same time, the same does not happen when requests are attended online as
@@ -243,43 +253,15 @@ Start application server:
 gunicorn -k gevent app:app
 ```
 
-## Start developing uBatch
-
-Install poetry
-
-```bash
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-```
-
-Clone repository
-
-```bash
-git clone git@github.com:mercadolibre/ubatch.git
-```
-
-Start shell and install dependencies
-
-```bash
-cd ubatch
-poetry shell
-poetry install
-```
-
-Run tests
-
-```bash
-pytest
-```
-
-Building docs
-
-```bash
-cd ubatch/docs
-poetry shell
-make html
-```
-
 ## Licensing
 
 **uBatch** is licensed under the Apache License, Version 2.0.
 See [LICENSE](https://github.com/mercadolibre/ubatch/blob/master/docs/LICENSE) for the full license text.
+
+## Contributing
+
+To contribute to this project, take a look to the [contributing file](/docs/CONTRIBUTING.md).
+
+## Maintainers
+
+* [Rodolfo Edelmann](https://github.com/rudicba) - [email](mailto:rodolfo.edelmann@mercadolibre.com)
