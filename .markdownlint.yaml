@@ -1,0 +1,12 @@
+# MD013/line-length - Line length
+MD013:
+  # Number of characters
+  line_length: 140
+
+# MD024/no-duplicate-heading/no-duplicate-header - Multiple headings with the same content
+# This is for the multiple same headers in CHANGELOG.md
+MD024:
+  # Only check sibling headings
+  allow_different_nesting: true
+  # Only check sibling headings
+  siblings_only: true
