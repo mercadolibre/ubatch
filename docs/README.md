@@ -260,7 +260,7 @@ See [LICENSE](https://github.com/mercadolibre/ubatch/blob/master/docs/LICENSE) f
 
 ## Contributing
 
-To contribute to this project, take a look to the [contributing file](/docs/CONTRIBUTING.md).
+To contribute to this project, take a look to the [contributing file](/docs/CONTRIBUTING.md) and the [coding guidelines](/docs/CODING_GUIDELINES.md).
 
 ## Maintainers
 
