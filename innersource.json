@@ -1,0 +1,14 @@
+{
+    "title":"ubatch",
+    "motivation":"uBatch is a simple, yet elegant library for processing streams data in micro batches.",
+    "contributions":[
+      "Bugfixes",
+      "Feature request",
+      "Questions",
+      "Documentation"
+    ],
+    "skills":[
+      "Python"
+    ],
+    "language":"Python"
+}
