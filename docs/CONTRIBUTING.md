@@ -50,6 +50,10 @@ Bug reports may also be sent in the form of a [pull request](#pull-request) cont
 
 ## Pull Request
 
+### Development
+
+Please, always follow our [coding guidelines](./CODING_GUIDELINES.md).
+
 We use the "fork and pull" model [described here](https://help.github.com/articles/about-collaborative-development-models/),
 where contributors push changes to their personal fork and create pull requests to bring those changes into the source repository.
 
@@ -87,16 +91,42 @@ poetry shell
 poetry install
 ```
 
+#### Requirements
+
+The application runtime dependencies, and also development, are declared in `pyproject.toml`. In case you need more information, you can read:
+
+* Poetry [add command](https://python-poetry.org/docs/cli/#add) docs.
+
+### Running tests
+
 Run tests
 
 ```bash
 pytest
 ```
 
-Building docs
+### Versioning
+
+The version of the **Python package** is declared in the [`pyproject.toml`](../pyproject.toml) file.
+
+This version string is set manually and must be [PEP440](https://www.python.org/dev/peps/pep-0440/) compliant.
+This strategy helps with the control and consistency of the _official_ releases.
+
+### Building docs
 
 ```bash
 cd ubatch/docs
 poetry shell
 make html
 ```
+
+### Official release checklist
+
+Pre-conditions: you are working on a feature branch, in your fork of the project. The branch is rebased from the upstream `master` branch.
+
+1. Update the [change log](./CHANGELOG.md).
+2. Update the [version](../pyproject.toml) (check PyPI to make sure the version does not exist).
+3. Make sure the tests for your changes.
+4. Commit your changes. Push the branch
+5. Create a PR in GitHub. Be descriptive. Assign reviewers.
+6. After an approval review is posted, one of the maintainers will merge the PR.
