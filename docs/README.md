@@ -4,7 +4,6 @@
 
 * [What is uBatch?](#what-is-uBatch?)
 * [Installing uBatch and supported versions](#installing-uBatch-and-supported-versions)
-* [Running tests](#running-tests)
 * [Why use uBatch](#why-use-uBatch?)
 * [Licensing](#licensing)
 * [Contributing](#contributing)
@@ -150,17 +149,7 @@ poetry install
 
 uBatch officially supports Python 3.6+.
 
-## Running tests
-
-```bash
-poetry run pytest
-```
-
-Or to test with the Docker image, run:
-
-```bash
-fury test
-```
+If you do not have `poetry` installed take a look at [CONTRIBUTING Installation section.](docs/CONTRIBUTING.md#Installation)
 
 ## Why use uBatch?
 
