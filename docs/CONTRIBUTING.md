@@ -71,19 +71,22 @@ We **HATE** reverse merge commits (they make git history tree a mess) and will r
 
 ### Installation
 
-Install poetry
+Install `poetry`:
 
 ```bash
+export POETRY_VERSION=1.1.6
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 ```
 
-Clone repository
+If the installation works ok then when you execute `poetry` in a terminal, you will see how to use `poetry`.
+
+Clone repository:
 
 ```bash
 git clone git@github.com:mercadolibre/ubatch.git
 ```
 
-Start shell and install dependencies
+Start shell and install dependencies:
 
 ```bash
 cd ubatch
@@ -99,9 +102,10 @@ The application runtime dependencies, and also development, are declared in `pyp
 
 ### Running tests
 
-Run tests
+Run tests:
 
 ```bash
+poetry shell
 pytest
 ```
 
