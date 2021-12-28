@@ -1,5 +1,11 @@
 # uBatch
 
+[![Documentation Status](https://readthedocs.org/projects/ubatch/badge/?version=latest)](https://ubatch.readthedocs.io/en/latest/?badge=latest)
+[![Downloads](https://pepy.tech/badge/ubatch)](https://pepy.tech/project/ubatch)
+[![Downloads](https://pepy.tech/badge/ubatch/month)](https://pepy.tech/project/ubatch)
+[![Downloads](https://pepy.tech/badge/ubatch/week)](https://pepy.tech/project/ubatch)
+[![InnerSource - Ready](https://img.shields.io/static/v1?label=InnerSource&message=Ready&color=green)](https://github.com/mercadolibre/fury_innersource/tree/develop)
+
 ## Index
 
 * [What is uBatch?](#what-is-uBatch?)
@@ -20,11 +26,6 @@ in GPU or take advantage from optimization of libraries written in C. Ideally,
 the code that processes the batches should release the Python GIL for allowing
 others threads/coroutines to run, this is true in many C libraries wrapped in
 Python.
-
-[![Documentation Status](https://readthedocs.org/projects/ubatch/badge/?version=latest)](https://ubatch.readthedocs.io/en/latest/?badge=latest)
-[![Downloads](https://pepy.tech/badge/ubatch)](https://pepy.tech/project/ubatch)
-[![Downloads](https://pepy.tech/badge/ubatch/month)](https://pepy.tech/project/ubatch)
-[![Downloads](https://pepy.tech/badge/ubatch/week)](https://pepy.tech/project/ubatch)
 
 Example
 
