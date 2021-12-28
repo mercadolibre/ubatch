@@ -22,7 +22,7 @@ repository = "https://github.com/mercadolibre/ubatch"
 homepage = "https://github.com/mercadolibre/ubatch"
 
 license = "Apache-2.0"
-readme = "docs/README.md"
+readme = "README.md"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/mercadolibre/ubatch/issues"
