@@ -2,7 +2,10 @@ from typing import Callable, List
 
 from ubatch.data_request import T, S
 from ubatch.ubatch import UBatch
-from typing_extensions import Protocol
+try:
+    from typing_extensions import Protocol
+except ModuleNotFoundError:
+    from typing import Protocol
 
 
 class VariableArgsFunction(Protocol):
