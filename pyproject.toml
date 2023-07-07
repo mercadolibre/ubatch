@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "ubatch"
-version = "1.0.1"
+version = "1.1.0"
 description = "Micro batch solution for improve throughput in SIMD processes"
 authors = ["Rodolfo E. Edelmann <redelmann@mercadolibre.com>"]
 maintainers = ["Leandro E. Colombo Viña <leandro.colombo@mercadolibre.com>"]
@@ -13,8 +13,6 @@ classifiers=[
   "Intended Audience :: Developers",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.6",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
 ]
@@ -28,7 +26,7 @@ readme = "README.md"
 "Bug Tracker" = "https://github.com/mercadolibre/ubatch/issues"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.8"
 flask-restx = { version = "^0.2", optional = true }
 scikit-learn = { version = "^0.23", optional = true }
 gunicorn = { version = "^20.0", optional = true }

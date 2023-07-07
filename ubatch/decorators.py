@@ -1,10 +1,10 @@
-from typing import Callable, List
+from typing import Callable, List, Protocol
 
 from ubatch.data_request import T, S
 from ubatch.ubatch import UBatch
 
 
-class VariableArgsFunction:
+class VariableArgsFunction(Protocol):
     def __call__(self, *args: List[T], **kwargs: List[T]) -> S: ...
 
 
