@@ -1,8 +1,7 @@
-from typing import Callable, List
+from typing import Callable, List, Protocol
 
 from ubatch.data_request import T, S
 from ubatch.ubatch import UBatch
-from typing_extensions import Protocol
 
 
 class VariableArgsFunction(Protocol):
