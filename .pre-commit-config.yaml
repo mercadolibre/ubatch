@@ -1,15 +1,9 @@
 repos:
--   repo: https://github.com/ambv/black
-    rev: 19.3b0
+  # Websec hook is MANDATORY, DO NOT comment it.
+  - repo: https://github.com/mercadolibre/fury_websec-git-hooks
+    rev: v1.0.0
     hooks:
-    - id: black
-      language_version: python3
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
-    hooks:
-    - id: flake8
--   repo: https://github.com/PyCQA/bandit
-    rev: 1.6.2
-    hooks:
-    - id: bandit
-      args: [--verbose, -ll, --recursive, ubatch]
+      - id: pre_commit_hook
+        stages: [commit]
+      - id: post_commit_hook
+        stages: [post-commit]
